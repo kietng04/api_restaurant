@@ -20,6 +20,8 @@ public class RestaurantTableController {
 
     @PostMapping("/update")
     public ResponseEntity<String> updateTable(@RequestBody RestaurantTable restaurantTable) {
+        // if restaurant des is empty
+        if (restaurantTable.getDes().trim().length() == 0) return ResponseEntity.badRequest().body("Vui lòng nhập đầy đủ thông tin");
         int ok = tableService.updateTable(restaurantTable);
         if (ok == 1) return ResponseEntity.ok("Cập nhật bàn thành công");
         return ResponseEntity.badRequest().body("Không tìm thấy bàn");
