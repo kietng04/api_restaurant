@@ -12,6 +12,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public int updateTable(RestaurantTable restaurantTable) {
+        //
         int res = 0;
         if (restaurantTable.getId() != null) {
             RestaurantTable table = tableRepository.findById(restaurantTable.getId()).orElse(null);
