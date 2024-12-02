@@ -3,6 +3,8 @@ package com.example.registrationlogindemo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +17,10 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
 
-    @PostMapping("/delete")
-    public ResponseEntity<String> deleteStaff(@RequestBody long id) {
-        int ok = staffService.delete(id);
-        if (ok == 1) return ResponseEntity.ok("Xóa nhân viên thành công");
-        return ResponseEntity.badRequest().body("Không tìm thấy nhân viên");
-    }
+    @DeleteMapping("/delete/{id}")
+public ResponseEntity<String> deleteStaff(@PathVariable long id) {
+    int ok = staffService.delete(id);
+    if (ok == 1) return ResponseEntity.ok("Xóa nhân viên thành công");
+    return ResponseEntity.badRequest().body("Không tìm thấy nhân viên");
+}
 }
