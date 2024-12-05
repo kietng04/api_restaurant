@@ -57,5 +57,5 @@ public class Staff {
 
     // role id default = 1
     @Column(name = "role_id", nullable = false)
-    private Long roleId = 1L;
+    private String roleId = "";
 }
