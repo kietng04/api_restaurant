@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.registrationlogindemo.service.StaffService;
 import com.example.registrationlogindemo.entity.Staff;
 // import getmappjng
@@ -24,16 +26,16 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteStaff(@PathVariable long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteStaff(@RequestParam long id) {
         int ok = staffService.delete(id);
         if (ok == 1) return ResponseEntity.ok("Xóa nhân viên thành công");
         return ResponseEntity.badRequest().body("Không tìm thấy nhân viên");
     }
 
     // get mapping nhanvien base on id
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Object> getStaff(@PathVariable long id) {
+    @GetMapping("/get")
+    public ResponseEntity<Object> getStaff(@RequestParam long id) {
         Staff staff = staffService.get(id);
         
         if (staff == null) return ResponseEntity.badRequest().body("Không tìm thấy nhân viên");
