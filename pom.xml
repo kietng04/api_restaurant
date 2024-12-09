@@ -16,11 +16,11 @@
     <description>Demo project for Spring Boot</description>
     
     <properties>
-        <java.version>23</java.version>
+        <java.version>21</java.version>
         <lombok.version>1.18.30</lombok.version>
         <mysql.version>8.3.0</mysql.version>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
     
     <dependencies>

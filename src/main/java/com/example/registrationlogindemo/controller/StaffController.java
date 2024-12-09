@@ -55,9 +55,17 @@ public class StaffController {
         // username duplicate ? 
         ArrayList<Staff> staffs = staffService.getAll();
         for (Staff s : staffs) {
-            if (s.getUsername().equals(staff.getUsername())) 
+            if (s.getUsername().equals(staff.getUsername()) && s.getId() != staff.getId()) 
                 return ResponseEntity.badRequest().body("Tên đăng nhập đã tồn tại");
+            if( s.getEmail().equals(staff.getEmail()) && s.getId() != staff.getId())
+             return ResponseEntity.badRequest().body("Email trùng với nhân viên khác");
+            
+             if( s.getPhone().equals(staff.getPhone()) && s.getId() != staff.getId())
+             return ResponseEntity.badRequest().body("Số điện thoại trùng với nhân viên khác");
+
         }
+
+
         // length of so dien thoai must be 10 start with 0
         if (staff.getPhone().length() != 10 || staff.getPhone().charAt(0) != '0') 
             return ResponseEntity.badRequest().body("Số điện thoại không hợp lệ vui lòng nhập 10 số và bắt đầu bằng số 0");
@@ -67,6 +75,7 @@ public class StaffController {
         int ok = staffService.save(staff);
         if (ok == 1) return ResponseEntity.ok("Thêm nhân viên thành công");
         return ResponseEntity.badRequest().body("ID Nhân viên đã tồn tại");
+
     }
 
     // put mapping update staff
@@ -89,6 +98,17 @@ public class StaffController {
         // regex only number a-z A-Z 0-9 con tain @gmail.com
         if (!staff.getEmail().matches("^[a-zA-Z0-9]+@gmail.com$")) 
             return ResponseEntity.badRequest().body("Email không hợp lệ vui lòng nhập đúng định dạng");
+
+        // check trùng
+        ArrayList<Staff> staffs = staffService.getAll();
+        for (Staff s : staffs) {
+            if( s.getEmail().equals(staff.getEmail()) && s.getId() != staff.getId())
+             return ResponseEntity.badRequest().body("Email trùng với nhân viên khác");
+            
+             if( s.getPhone().equals(staff.getPhone()) && s.getId() != staff.getId())
+             return ResponseEntity.badRequest().body("Số điện thoại trùng với nhân viên khác");
+
+        }
         int ok = staffService.update(staff);
         if (ok == 1) return ResponseEntity.ok("Cập nhật nhân viên thành công");
         return ResponseEntity.badRequest().body("Không tìm thấy nhân viên");
